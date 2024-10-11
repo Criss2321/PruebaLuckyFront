@@ -1,0 +1,92 @@
+<h2 mat-dialog-title style="text-align: center;">{{ isEditMode ? 'Editar Personal' : 'Registrar Personal' }}</h2>
+<mat-dialog-content style="display: grid; ">
+  <form [formGroup]="personalForm">
+    <div style="display: flex; flex-direction: row;">
+      <div style="display: flex; flex-direction: column; width: 50%; margin: 10px;">
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo de Documento</mat-label>
+          <mat-select formControlName="tipoDoc">
+            <mat-option value="DNI">DNI</mat-option>
+            <mat-option value="CEX">CEX</mat-option>
+            <mat-option value="PAS">PAS</mat-option>
+          </mat-select>
+          <mat-error *ngIf="personalForm.get('tipoDoc')?.hasError('required')">
+            Tipo de documento es requerido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Número de Documento</mat-label>
+          <input matInput formControlName="numeroDoc" required>
+          <mat-error *ngIf="personalForm.get('numeroDoc')?.hasError('required')">
+            Número de documento es requerido.
+          </mat-error>
+          <mat-error *ngIf="personalForm.get('numeroDoc')?.hasError('pattern')">
+            El formato del número de documento no es válido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido Paterno</mat-label>
+          <input matInput formControlName="apPaterno" required>
+          <mat-error *ngIf="personalForm.get('apPaterno')?.hasError('required')">
+            Apellido paterno es requerido.
+          </mat-error>
+          <mat-error *ngIf="personalForm.get('apPaterno')?.hasError('pattern')">
+            El apellido paterno debe empezar con mayúscula y seguir con minúsculas.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido Materno</mat-label>
+          <input matInput formControlName="apMaterno" required>
+          <mat-error *ngIf="personalForm.get('apMaterno')?.hasError('required')">
+            Apellido materno es requerido.
+          </mat-error>
+          <mat-error *ngIf="personalForm.get('apMaterno')?.hasError('pattern')">
+            El apellido materno debe empezar con mayúscula y seguir con minúsculas.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div style="display: flex; flex-direction: column; width: 50%; margin: 10px;">
+        <mat-form-field appearance="fill">
+          <mat-label>Primer Nombre</mat-label>
+          <input matInput formControlName="nombre1" type="text" required>
+          <mat-error *ngIf="personalForm.get('nombre1')?.hasError('required')">
+            Primer nombre es requerido.
+          </mat-error>
+          <mat-error *ngIf="personalForm.get('nombre1')?.hasError('pattern')">
+            El primer nombre debe empezar con mayúscula y seguir con minúsculas.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Segundo Nombre</mat-label>
+          <input matInput formControlName="nombre2">
+          <mat-error *ngIf="personalForm.get('nombre2')?.hasError('pattern')">
+            El segundo nombre debe empezar con mayúscula y seguir con minúsculas.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="fechaNac" required>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Ingreso</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="fechaIngreso" required>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="warn" (click)="onClose()">Cerrar</button>
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!personalForm.valid">{{ isEditMode ?
+    'Actualizar' : 'Registrar' }}</button>
+</mat-dialog-actions>

@@ -1,0 +1,54 @@
+<h2 mat-dialog-title style="text-align: center;">{{ isEditMode ? 'Editar Hijo' : 'Registrar Hijo' }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="hijoForm">
+    <div style="display: flex; flex-direction: row;">
+      <div style="display: flex; flex-direction: column; width: 50%; margin: 10px;">
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo de Documento</mat-label>
+          <mat-select formControlName="tipoDoc">
+            <mat-option value="DNI">DNI</mat-option>
+            <mat-option value="CEX">CEX</mat-option>
+            <mat-option value="PAS">PAS</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Número de Documento</mat-label>
+          <input matInput formControlName="numeroDoc" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido Paterno</mat-label>
+          <input matInput formControlName="apPaterno" required>
+        </mat-form-field>
+      </div>
+      <div style="display: flex; flex-direction: column; width: 50%; margin: 10px;">
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido Materno</mat-label>
+          <input matInput formControlName="apMaterno" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Primer Nombre</mat-label>
+          <input matInput formControlName="nombre1" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Segundo Nombre</mat-label>
+          <input matInput formControlName="nombre2">
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="fechaNac" required>
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button color="warn" (click)="onClose()">Cerrar</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!hijoForm.valid">{{ isEditMode ? 'Actualizar' : 'Registrar' }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,2 @@
+C:\Exam_Cristopher\CristopherSullca\cristophersullca.client\obj\Debug\cristophersullca.client.esproj.CoreCompileInputs.cache
+D:\Exam_Cristopher\Exam_Cristopher\CristopherSullca\cristophersullca.client\obj\Debug\cristophersullca.client.esproj.CoreCompileInputs.cache

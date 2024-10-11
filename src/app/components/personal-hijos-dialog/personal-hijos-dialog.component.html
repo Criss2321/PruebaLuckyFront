@@ -1,0 +1,63 @@
+<div class="mat-elevation-z8" style="padding: 50px;">
+  <h2 style="text-align: center;">Lista de Hijos</h2>
+  <button mat-flat-button color="primary" style="margin-bottom: 15px;" (click)="registrarHijo()">Registrar Hijo</button>
+  <div class="mat-form-field">
+    <input matInput (keyup)="applyFilter($event)" style="padding: 15px; margin-bottom: 15px;" placeholder="Buscar por nombre">
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- IdPersonal Column -->
+    <ng-container matColumnDef="idHijo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.idHijo}} </td>
+    </ng-container>
+
+    <!-- NombreCompleto Column -->
+    <ng-container matColumnDef="nombreCompleto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Completo </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombreCompleto}} </td>
+    </ng-container>
+
+    <!-- TipoDoc Column -->
+    <ng-container matColumnDef="tipoDoc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Doc </th>
+      <td mat-cell *matCellDef="let element"> {{element.tipoDoc}} </td>
+    </ng-container>
+
+    <!-- NumeroDoc Column -->
+    <ng-container matColumnDef="numeroDoc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Numero Doc </th>
+      <td mat-cell *matCellDef="let element"> {{element.numeroDoc}} </td>
+    </ng-container>   
+
+    <!-- FechaNac Column -->
+    <ng-container matColumnDef="fechaNac">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Nac </th>
+      <td mat-cell *matCellDef="let element"> {{element.fechaNac | date}} </td>
+    </ng-container>
+
+    <!-- Editar Column -->
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="editarHijo(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Eliminar Column -->
+    <ng-container matColumnDef="eliminar">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="eliminarHijo(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
